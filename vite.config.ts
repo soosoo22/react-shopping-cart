@@ -15,6 +15,7 @@ export default defineConfig(({ mode }) => {
         },
       }),
     ],
+    base: '/react-shopping-cart/dist/',
     define: {
       'process.env.VITE_USER_API_URL': JSON.stringify(env.VITE_USER_API_URL),
       'process.env.VITE_USER_ID': JSON.stringify(env.VITE_USER_ID),
