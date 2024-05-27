@@ -2,7 +2,7 @@ import 'soosoo-react-modal-component/dist/style.css';
 import { Modal } from 'soosoo-react-modal-component';
 
 import { useEffect, useState } from 'react';
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import { specialZoneCheckState, couponDiscountAmount, checkedCouponsState } from '../../recoil/atoms/atoms';
 import { calculateOrderPrice } from '../../recoil/selectors/selectors';
 
@@ -20,7 +20,8 @@ export default function OrderConfirmCart({ cartItems }: { cartItems: Cart[] }) {
   const cartTotalCount = cartItems.reduce((acc, cartItem) => acc + cartItem.quantity, 0);
   const [isSpecialZoneCheck, setIsSpecialZoneCheck] = useRecoilState(specialZoneCheckState);
 
-  const [couponDiscount, setCouponDiscount] = useRecoilState(couponDiscountAmount);
+  const setCouponDiscount = useSetRecoilState(couponDiscountAmount);
+
   const [discount, setDiscount] = useState(0);
 
   const { totalOrderPrice } = useRecoilValue(calculateOrderPrice);
