@@ -1,4 +1,4 @@
-import { useSetRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import { checkedCartItems } from '../../recoil/selectors/selectors';

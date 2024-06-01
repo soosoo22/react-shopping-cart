@@ -21,7 +21,6 @@ export default function OrderConfirmCart({ cartItems }: { cartItems: Cart[] }) {
   const [isSpecialZoneCheck, setIsSpecialZoneCheck] = useRecoilState(specialZoneCheckState);
 
   const setCouponDiscount = useSetRecoilState(couponDiscountAmount);
-
   const [discount, setDiscount] = useState(0);
 
   const { totalOrderPrice } = useRecoilValue(calculateOrderPrice);
@@ -30,13 +29,16 @@ export default function OrderConfirmCart({ cartItems }: { cartItems: Cart[] }) {
   const [isOpenModal, setIsOpenModal] = useState(false);
 
   useEffect(() => {
+    calculateDiscount();
+  }, [checkedCoupons]);
+
+  const calculateDiscount = () => {
     let newDiscount = 0;
     checkedCoupons.map((coupon) => {
       newDiscount += calculateDiscountAmount(coupon, totalOrderPrice);
     });
-
     setDiscount(newDiscount);
-  }, [checkedCoupons]);
+  };
 
   const modalFooterButtons = [
     {
@@ -50,7 +52,7 @@ export default function OrderConfirmCart({ cartItems }: { cartItems: Cart[] }) {
   ];
 
   const handleToggleSpecialZoneCheck = () => {
-    setIsSpecialZoneCheck(!isSpecialZoneCheck);
+    setIsSpecialZoneCheck((prev) => !prev);
   };
 
   return (
